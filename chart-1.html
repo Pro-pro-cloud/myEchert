@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 600px;
+            background-color: bisque;
+        }
+    </style>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        let myCharts1 = echarts.init(document.querySelector(".box"))
+        let option1 = option = {
+            color: ['pink','green','yellow','blue'],
+            // 1.图表标题 *-*
+    title: { 
+        text: '折线图堆叠'
+    },
+    // 2.图表的提示框信息 (将鼠标移入图表会出现提示信息)
+    tooltip: { 
+        trigger: 'axis' // 触发方向
+// 'item'
+
+// 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+
+// 'axis'
+
+// 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
+    },
+    // 3.图例组件（显示图例）
+    legend: {// 注意 ： 如果series 中存在name则legend name可以省去
+        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+    },
+    // 4.网格配置 *-* 可以去控制图表的大小以及网格的其他外观参数
+    grid: {
+        left: '3%', // 距离外包dom容器左侧距离为3%
+        right: '4%', // 距离外包dom容器右侧距离为3%
+        bottom: '3%',
+        width : "1",
+        containLabel: true  // grid 区域是否包含坐标轴的刻度标签
+    },
+    // 5.工具箱组件 可以另存为图片等功能
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+        // 工具栏。内置有导出图片，数据视图，动态类型切换，数据区域缩放，重置五个工具。
+    },
+    // 6.x轴的相关配置 *-*
+    xAxis: {
+        type: 'category',
+/*坐标轴类型。
+可选：
+'value' 数值轴，适用于连续数据。 
+数值
+
+'category' 类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 series.data 或 dataset.source 中取，或者可通过 xAxis.data 设置类目数据。 
+数据名称
+
+'time' 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+
+'log' 对数轴。适用于对数数据。
+*/
+        boundaryGap: false, // 是否让线条与坐标轴之间纯在缝隙
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    },
+    yAxis: {
+        type: 'value'
+    },
+    // 7.对图表进行具体操作 包括传递参数 修改图表类型 等等 *-*
+    series: [ 
+        { // 注意 ： 如果series 中存在name则legend name可以省去
+            name: '邮件营销',
+            type: 'line',
+            // stack: '总量', // 在图表上显示数据的加和 数据堆叠
+            data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name: '联盟广告',
+            type: 'line',
+            // stack: '总量',
+            data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name: '视频广告',
+            type: 'line',
+            // stack: '总量',
+            data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+            name: '直接访问',
+            type: 'line',
+            // stack: '总量',
+            data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            name: '搜索引擎',
+            type: 'line',
+            // stack: '总量',
+            color : 'yellow',
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+};
+
+option && myCharts1.setOption(option);
+    </script>
+</body>
+</html>
